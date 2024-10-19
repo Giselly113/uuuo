@@ -1,0 +1,191 @@
+/* Geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: #1443c5;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Alinha corretamente o menu em telas menores */
+}
+
+.nav-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #f0e6ff;
+}
+
+/* Slider */
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 10px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slider img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: none; /* Esconde todas as imagens inicialmente */
+}
+
+.slider img.active {
+    display: block; /* Mostra apenas a imagem ativa */
+}
+
+/* Departamentos */
+.departamentos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+}
+
+.departamentos a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 2px solid #386dff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.departamentos a:hover {
+    background-color: #0931a0;
+    color: #fff;
+}
+
+/* Produtos */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.product {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+    flex: 1 1 calc(33.33% - 20px);
+    max-width: 300px;
+    position: relative;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product h3 {
+    margin: 10px 0;
+    color: #000;
+    font-size: 1.25em;
+}
+
+/* Outros elementos permanecem iguais */
+
+/* Consultas de Mídia */
+@media (max-width: 768px) {
+    .product {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    .search-bar input {
+        width: calc(100% - 46px);
+    }
+
+    .newsletter input[type="email"] {
+        width: calc(100% - 120px);
+    }
+
+    .departamentos {
+        flex-direction: column; /* Ajusta para exibir departamentos em coluna */
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .slider {
+        max-height: 200px;
+    }
+
+    .product {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    .departamentos {
+        flex-direction: column;
+        align-items: center;
+    }
+}

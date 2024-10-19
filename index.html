@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Geral */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        header {
+            background-color: #0730a1;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #f0e6ff;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 1100px; 
+            margin: 10px auto; 
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .slider img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: none; /* Esconde todas as imagens inicialmente */
+        }
+
+        .slider img.active {
+            display: block; /* Mostra apenas a imagem ativa */
+        }
+
+        .departamentos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .departamentos a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 2px solid #386dff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .departamentos a:hover {
+            background-color: #0931a0;
+            color: #fff;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .product {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            flex: 1 1 calc(33.33% - 20px); /* 3 produtos por linha */
+            max-width: 300px; /* Limita a largura máxima dos produtos */
+            position: relative; /* Necessário para posicionar o desconto */
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+            color: #000;
+            font-size: 1.25em;
+        }
+
+        .product .sub-price {
+            text-decoration: line-through;
+            color: #ad0404;
+        }
+
+        .product .price {
+            font-weight: 700;
+            color: #000;
+            margin: 5px 0;
+        }
+
+        .discount {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ad0404;
+            color: #fff;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .rating {
+            margin: 10px 0;
+        }
+
+        .star {
+            color: gold;
+            font-size: 1.2em;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #000000;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .newsletter {
+            background-color: #0c177a;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .newsletter input[type="email"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: calc(100% - 130px);
+            margin-right: 10px;
+        }
+
+        .newsletter input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #0b338aa9;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .newsletter input[type="submit"]:hover {
+            background-color: #2b2b2b;
+        }
+
+        .price-button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #0e2975; /* Cor de fundo azul */
+            color: #fff;
+            border: 5px solid #052270; /* Borda azul */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            text-decoration: none;
+        }
+
+        .price-button:hover {
+            background-color: #0931a0; /* Cor ao passar o mouse */
+            border-color: #fff; /* Mudança na cor da borda */
+        }
+
+        /* Esconde o botão inicialmente */
+        .price-button {
+            display: none;
+        }
+
+        /* Mostra o botão quando o mouse passa sobre o produto */
+        .product:hover .price-button {
+            display: inline-block;
+        }
+
+        /* Consultas de Mídia para Dispositivos Móveis */
+        @media (max-width: 768px) {
+            .product {
+                flex: 1 1 calc(33% - 20px);
+            }
+
+            .search-bar input {
+                width: calc(100% - 46px);
+            }
+
+            .newsletter input[type="email"] {
+                width: calc(100% - 120px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-bar {
+                flex-direction: center;
+                margin-top: 10px;
+            }
+
+            .search-bar input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .slider {
+                max-height: 200px;
+            }
+
+            .product {
+                flex: 1 1 calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h1>021</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produtos...">
+        <button id="searchButton">Buscar</button>
+    </div>
+</header>
+
+<div class="slider">
+    <img src="http://pompom.com.br/wp-content/uploads/2024/08/1920x720_banner_linhabanho_alt.png" alt="Promoção 1" class="active">
+    <img src="http://pompom.com.br/wp-content/uploads/2024/08/1920x720_banner_linhabanho_alt.png" alt="Promoção 2">
+    <img src="http://pompom.com.br/wp-content/uploads/2024/08/1920x720_banner_linhabanho_alt.png" alt="Promoção 3">
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slider img');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    // Exemplo de lógica para alternar as imagens automaticamente
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Trocar de slide a cada 3 segundos
+    setInterval(nextSlide, 3000);
+</script>
+</body>
+</html>
+
+
+<div class="product-grid">
+    <div class="product">
+        <div class="discount">-20%</div>
+        <img src="https://m.media-amazon.com/images/I/616GAmsvgCL._AC_SX425_.jpg" alt="Máscara">
+        <h3>Máscara Morte Súbita 450g</h3>
+        <span class="sub-price">R$ 59,00</span>
+        <div class="price">R$ 44,90 NO PIX</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="https://pag.ae/7-XiuwhNM" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://m.media-amazon.com/images/I/61zY7kYIpzL._AC_SX522_.jpg" alt="sandalia Infantil">
+        <h3>Lola Cosmetics Xapadinha Máscara Disciplinante 450G</h3>
+        <span class="sub-price">R$ 51,90</span>
+        <div class="price">R$ 44,90 NO PIX</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://m.media-amazon.com/images/I/61fR3wI8NUL._AC_SX425_.jpg" alt="Papete Menina">
+        <h3> Gelatina Super Óleos, Nutrição Cacheados, 400 g</h3>
+        <span class="sub-price">R$ 89,00</span>
+        <div class="price">R$ 43,90</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://down-br.img.susercontent.com/file/sg-11134301-7rceb-lt5gssef408ae3@resize_w450_nl.webp" alt="Chinelo Unissex">
+        <h3>Chaveiro Stitch Rosa</h3>
+        <span class="sub-price">R$ 14,90</span>
+        <div class="price">R$ 9,90</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/517sg0ZNemL._AC_SX679_.jpg" alt="Carrinho Unissex">
+    <h3>Huggies Extra Suave - Shampoo Infantil, 600ml</h3>
+    <span class="sub-price">R$ 49,00</span>
+    <div class="price">R$ 29,99</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/51zpdZ1GL6L._AC_SX425_.jpg" alt="Carrinho Unissex">
+    <h3>Lola Cosmetics Densidade Máscara 230 G</h3>
+    <span class="sub-price">R$ 55,00</span>
+    <div class="price">R$ 29,99</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/81LbIKRgAqL._AC_SX569_.jpg" alt="Carrinho Unissex">
+    <h3>MamyPoko Lenços Umedecidos Dia&Noite 200 Unidades</h3>
+    <span class="sub-price">R$ 35,50</span>
+    <div class="price">R$ 31,98</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="https://pag.ae/7-ZbXPbKo" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/61lXcxCQQqL._AC_SY879_.jpg" alt="Carrinho Unissex">
+    <h3>Oléo Lola Cosmetics Pinga Cenoura E Oliva 50ml</h3>
+    <span class="sub-price">R$ 45,00</span>
+    <div class="price">R$ 26,99</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/51Rmavt4J5L.__AC_SX300_SY300_QL70_ML2_.jpg" alt="massinha Unissex">
+    <h3>Oléo Lola Cosmetics - Argan Oil, 50 ml</h3>
+    <span class="sub-price">R$ 59,00</span>
+    <div class="price">R$23,49 NO PIX</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/51xm4WPhccL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="Carrinho Unissex">
+    <h3>Lola Cosmetics Densidade Acidificante 250g </h3>
+    <span class="sub-price">R$ 49,99</span>
+    <div class="price">R$ 32,45</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/61723eX+gaL._AC_SY450_.jpg" alt="Carrinho Unissex">
+    <h3>Danos vorazes - Oleo reparador, 50 ml</h3>
+    <span class="sub-price">R$ 109,00</span>
+    <div class="price">R$ 25,18</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+<div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://m.media-amazon.com/images/I/51wlgD5vieL._AC_SX425_.jpg" alt="Carrinho Unissex">
+    <h3>NIVEA Sabonete em Barra Pure Milk Sensitive Promo 6 un. 90g</h3>
+    <span class="sub-price">R$ 109,00</span>
+    <div class="price">R$ 22,99</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+
+<div class="product-grid">
+    <!-- Produto 1 -->
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://m.media-amazon.com/images/I/51fQ8Lr5YSL._AC_SX569_.jpg" alt="Produto 1">
+        <h3>Fralda Pom Pom Protek Proteção de Mãe Hiper M 86 Unidades</h3>
+        <span class="sub-price">R$ 92,55</span>
+        <div class="price">R$ 84,97</div>
+         <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+    <!-- Produto 2 -->
+    <div class="product">
+        <div class="discount">-10%</div>
+        <img src="https://m.media-amazon.com/images/I/717nfS8pIuL._AC_SX569_.jpg" alt="Produto 2">
+        <h3>Huggies Fralda Tripla Proteção M 92 Un</h3>
+        <span class="sub-price">R$ 98,99</span>
+        <div class="price">R$ 89,95</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 3 -->
+    <div class="product">
+        <div class="discount">-20%</div>
+        <img src="https://m.media-amazon.com/images/I/71aOjTMuajL._AC_SX569_.jpg" alt="Produto 3">
+        <h3>Fralda Pom Pom Protek Proteção de Mãe Mega G 42 Unidades</h3>
+        <span class="sub-price">R$ 150,00</span>
+        <div class="price">R$41,89</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 4 -->
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://m.media-amazon.com/images/I/61gQETlUa4L._AC_SX425_.jpg" alt="Produto 4">
+        <h3>Intimus Gel Absorvente Noturno Suave C/Abas</h3>
+        <span class="sub-price">R$ 28,99</span>
+        <div class="price">R$ 24,90</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 5 -->
+    <div class="product">
+        <div class="discount">-12%</div>
+        <img src="https://m.media-amazon.com/images/I/71us7END9kL._AC_SX425_.jpg" alt="Produto 5">
+        <h3>Sempre Livre Absorvente Externo Com Abas Suave, 32un</h3>
+        <span class="sub-price">R$ 24,90</span>
+        <div class="price">R$19,50</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 6 -->
+    <div class="product">
+        <div class="discount">-10%</div>
+        <img src="https://m.media-amazon.com/images/I/711cMkFTBfL._AC_SX569_.jpg" alt="Produto 6">
+        <h3>Absorvente Always Super Proteção Suave - 32 unidades</h3>
+        <span class="sub-price">R$ 24,89</span>
+        <div class="price">R$ 18,90</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 7 -->
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://m.media-amazon.com/images/I/61ZmOBGPDYL._AC_SX425_.jpg" alt="Produto 7">
+        <h3>Gelatina Capilar, ToDeCacho, Super Definição 550g</h3>
+        <span class="sub-price">R$ 27,99</span>
+        <div class="price">R$ 25,99</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 8 -->
+    <div class="product">
+        <div class="discount">-25%</div>
+        <img src="https://m.media-amazon.com/images/I/612xtZpCjuL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="Produto 8">
+        <h3>#TODECACHO GELATINA MODELADORA CONDICIONADOR KIDS UVA 550GR</h3>
+        <span class="sub-price">R$27,99</span>
+        <div class="price">R$25,99</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 9 -->
+    <div class="product">
+        <div class="discount">-10%</div>
+        <img src="https://m.media-amazon.com/images/I/51sno7BXbWL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="Produto 9">
+        <h3>Gelatina #todecacho Mais Definição Transição Capilar, 550g</h3>
+        <span class="sub-price">R$27,99</span>
+        <div class="price">R$ 24,89+</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+
+    <!-- Produto 10 -->
+    <div class="product">
+        <div class="discount">-15%</div>
+        <img src="https://http2.mlstatic.com/D_NQ_NP_712041-MLB78300570001_082024-O.webp" alt="Produto 10">
+        <h3>Shorts Izing Feminino Cos Alto Slim</h3>
+        <span class="sub-price">R$ 24,99</span>
+        <div class="price">R$ 18,90</div>
+        <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        <a href="" class="price-button">Comprar</a>
+    </div>
+   <!-- Produto 11 -->
+    <div class="product">
+    <div class="discount">-35%</div>
+    <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lsc0iqio1sfv7d@resize_w450_nl.webp" alt="Produto 10">
+    <h3>Short Jeans Com Cinto Elastico</h3>
+    <span class="sub-price">R$ 90,00</span>
+    <div class="price">R$ 76,50</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+ <!-- Produto 12 -->
+ <div class="product">
+    <div class="discount">-15%</div>
+    <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lr3r5rzvh2x90e.webp" alt="Produto 10">
+    <h3>Calça Jogger Masculina </h3>
+    <span class="sub-price">R$ 99,00</span>
+    <div class="price">R$ 76,50</div>
+    <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+    </div>
+    <a href="" class="price-button">Comprar</a>
+</div>
+
+
+<div class="newsletter">
+    <h2>Receba Ofertas Exclusivas!</h2>
+    <form action="#" method="post">
+        <input type="email" placeholder="Seu e-mail" required>
+        <input type="submit" value="Inscreva-se">
+    </form>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Galpao 021 - Todos os direitos reservados.</p>
+    <div class="social-links">
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </div>
+    <p><a href="politica-privacidade.html">Política de Privacidade</a> | <a href="termos.html">Termos de Serviço</a></p>
+</footer>
+
+</body>
+</html>
+
+
